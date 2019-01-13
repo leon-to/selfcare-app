@@ -1,4 +1,4 @@
-package ece496.calendar;
+package com.ece496.selfcare;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package ece496.calendar;
+package com.ece496.selfcare;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("ece496.calendar", appContext.getPackageName());
+        assertEquals("com.ece496.selfcare", appContext.getPackageName());
     }
 }
