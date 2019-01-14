@@ -1,8 +1,12 @@
 package com.ece496.selfcare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +22,10 @@ import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.riontech.calendar.CustomCalendar;
+import com.riontech.calendar.dao.Event;
+import com.riontech.calendar.dao.EventData;
+import com.riontech.calendar.dao.dataAboutDate;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +33,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private CustomCalendar customCalendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,36 +61,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-
-        CalendarView calendarView = (CalendarView) findViewById(R.id.calendarView);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2018, 7, 5);
-
-        try {
-            calendarView.setDate(calendar);
-        } catch (OutOfDateRangeException e) {
-            e.printStackTrace();
-        }
-
-        calendarView.setOnDayClickListener(new OnDayClickListener() {
-            @Override
-            public void onDayClick(EventDay eventDay) {
-                Calendar clickedDayCalendar = eventDay.getCalendar();
-                List<EventDay> events = new ArrayList<>();
-
-                Calendar calendar = Calendar.getInstance();
-                events.add(new EventDay(clickedDayCalendar, R.drawable.sample_circle));
-
-                try {
-                    calendarView.setDate(clickedDayCalendar);
-                    calendarView.setEvents(events);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
     }
 
@@ -121,20 +101,26 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
+        Class fragmentClass = null;
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_calendar) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            fragmentClass = CalendarFragment.class;
+        } else if (id == R.id.nav_setting) {
 
         }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

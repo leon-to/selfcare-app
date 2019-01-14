@@ -8,11 +8,13 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior"
 tools:context=".MainActivity"
 tools:showIn="@layout/app_bar_main">
 
-    <com.applandeo.materialcalendarview.CalendarView
-        android:id="@+id/calendarView"
+    <com.riontech.calendar.CustomCalendar
+        android:id="@+id/customCalendar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:type="one_day_picker"
-        app:eventsEnabled="true"/>
+        app:endMonth="12"
+        app:endYear="2030"
+        app:startMonth="01"
+        app:startYear="2000" />
 
 </android.support.constraint.ConstraintLayout>
