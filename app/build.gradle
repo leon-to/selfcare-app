@@ -34,4 +34,5 @@ dependencies {
 
     implementation 'com.applandeo:material-calendar-view:1.5.1'
     implementation 'com.riontech:calendar:1.0'
+    implementation 'com.karumi:dexter:5.0.0'
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import com.riontech.calendar.dao.dataAboutDate;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -100,6 +102,17 @@ public class CalendarFragment extends Fragment {
         eventData.setData(dataAboutDates);
         eventDataList.add(eventData);
         customCalendar.addAnEvent("2019-01-12", 1, eventDataList);
+
+
+
+
+        Scheduler scheduler = new Scheduler(getContext().getContentResolver());
+        scheduler.title("Essay")
+                 .description("1000 words")
+                 .location("GB library")
+                 .begin_time(2019, 1, 14, 7, 0)
+                 .end_time(2019, 1, 14, 8, 0)
+                 .schedule();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
