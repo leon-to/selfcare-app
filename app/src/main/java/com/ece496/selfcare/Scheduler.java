@@ -5,12 +5,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import static java.util.TimeZone.getAvailableIDs;
 
 public class Scheduler{
     private ContentResolver contentResolver;
@@ -46,6 +49,8 @@ public class Scheduler{
         values.put(Events.TITLE, title);
         values.put(Events.DESCRIPTION, description);
         values.put(Events.EVENT_LOCATION, location);
+        values.put(Events.CALENDAR_ID, Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? 3:1);
+        values.put(Events.EVENT_TIMEZONE, getAvailableIDs()[0]);
 
         Uri uri = contentResolver.insert(Events.CONTENT_URI, values);
     }
