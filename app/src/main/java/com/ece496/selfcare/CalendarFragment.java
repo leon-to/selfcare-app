@@ -106,13 +106,13 @@ public class CalendarFragment extends Fragment {
 
 
 
-        Scheduler scheduler = new Scheduler(getContext().getContentResolver());
-        scheduler.title("Essay")
-                 .description("1000 words")
-                 .location("GB library")
-                 .begin_time(2019, 1, 14, 7, 0)
-                 .end_time(2019, 1, 14, 8, 0)
-                 .schedule();
+//        Scheduler scheduler = new Scheduler(getContext().getContentResolver());
+//        scheduler.title("Essay")
+//                 .description("1000 words")
+//                 .location("GB library")
+//                 .begin_time(2019, 0, 14, 7, 0)
+//                 .end_time(2019, 0, 14, 8, 0)
+//                 .schedule();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

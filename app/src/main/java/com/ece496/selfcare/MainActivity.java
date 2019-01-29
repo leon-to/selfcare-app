@@ -1,6 +1,7 @@
 package com.ece496.selfcare;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, new DynamicScheduler(getContentResolver()).read_events(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -80,6 +81,14 @@ public class MainActivity extends AppCompatActivity
                     @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
                 })
                 .check();
+
+        Scheduler.getInstance(getContentResolver())
+                 .title("Essay")
+                 .description("1000 words")
+                 .location("GB library")
+                 .begin_time(2019, 0, 29, 7, 0)
+                 .end_time(2019, 0, 29, 8, 0)
+                 .schedule();
     }
 
     @Override
