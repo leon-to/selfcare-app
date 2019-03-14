@@ -4,71 +4,43 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.logging.*;
 
+import GeneticAlgorithm.*;
+import GeneticAlgorithm.handler.EventHandler;
+import GeneticAlgorithm.handler.FitnessHandler;
+import GeneticAlgorithm.handler.PopulationHandler;
+import GeneticAlgorithm.handler.TimeslotHandler;
 
 public class Main{
-    static final Logger logger = Logger.getGlobal();
-
     public static void main(String[] args) throws Exception {
-        ScheduleBreeder breeder = new ScheduleBreeder();
-        Schedule male;
-        Event[] events = new Event[3];
-        Event event_1= new Event("Write 1000 word essay");
-        Event event_2= new Event("Workout");
-        events[0] = event_1;
-        events[1] = event_1;
-        events[2] = event_2;
+        EventHandler h_event = new EventHandler();
+        TimeslotHandler h_timeslot = new TimeslotHandler();
+        PopulationHandler h_population = new PopulationHandler(h_event, h_timeslot);
+        FitnessHandler h_fitness = new FitnessHandler(h_event, h_timeslot, h_population);
+        GeneticAlgorithmModel model = new GeneticAlgorithmModel(h_population, h_fitness);
 
-        LocalDateTime [] timeslots = new LocalDateTime[10];
-        timeslots[0] = LocalDateTime.of(2019, 3, 1, 9, 0);
-        timeslots[1] = LocalDateTime.of(2019, 3, 1, 10, 0);
-        timeslots[2] = LocalDateTime.of(2019, 3, 1, 11, 0);
-        timeslots[3] = LocalDateTime.of(2019, 3, 1, 12, 0);
-        timeslots[4] = LocalDateTime.of(2019, 3, 1, 14, 0);
-        timeslots[5] = LocalDateTime.of(2019, 3, 1, 16, 0);
-        timeslots[6] = LocalDateTime.of(2019, 3, 2, 8, 0);
-        timeslots[7] = LocalDateTime.of(2019, 3, 2, 10, 0);
-        timeslots[8] = LocalDateTime.of(2019, 3, 2, 11, 0);
-        timeslots[9] = LocalDateTime.of(2019, 3, 2, 12, 0);
-        
-        logger.setLevel(Level.FINE);
+        h_event
+            .add_event("Assignment 1")
+            .add_event("Assignment 2");
 
-        int population_size = 10;
-        int chromosome_length = events.length;
-        int gene_type = timeslots.length;
+        int month = 3;
+        h_timeslot
+            .add_timeslot(2019, month, 14, 7)
+            .add_timeslot(2019, month, 14, 8)
+            .add_timeslot(2019, month, 14, 19)
+            .add_timeslot(2019, month, 15, 10)
+            .add_timeslot(2019, month, 15, 11)
+            .add_timeslot(2019, month, 16, 12);
 
-        double p_crossover = 1;
-        double p_mutation = 0.1;
-
-        double fitness_tolerance = 0.0001;
-
-        TimeslotHandler timeslot_handler = new TimeslotHandler(timeslots);
-
-        SchedulePopulation schedule_population = new SchedulePopulation(
-            timeslot_handler,
-            events, timeslots, 
-            population_size, chromosome_length, gene_type,
-            p_crossover, p_mutation,
-            fitness_tolerance
+        h_population.set_characteristics(
+            10, // max population size
+            h_event.events.size(), // chromosome length
+            h_timeslot.timeslots.size() // number of gene type
         );
-
-        boolean children_only = true;     
-
-        timeslot_handler.sort_timeslots();
-        timeslot_handler.compute_timescore(2, timeslots[9]);
-        timeslot_handler.compute_timescore(3, timeslots[9]);
-
-        schedule_population .initialize()
-                            .fitness(!children_only);
-
-        // while(true)
-        do{
-            schedule_population .tournament_selection()
-                                .onepoint_crossover()
-                                .onepoint_mutation()
-                                .fitness(children_only)
-                                .replace();
-        }
-        while(schedule_population.termination());
-        
+        model.train(
+            10, // number of initialized population
+            0.1, // probability of mutation
+            10 //epochs
+        );
+        System.out.println("Best fit: " + h_population.get_bestfit());
     }
 }
