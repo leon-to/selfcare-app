@@ -1,4 +1,4 @@
-package GeneticAlgorithm.object;
+package com.ece496.genealgo.object;
 
 import java.time.LocalDateTime;
 

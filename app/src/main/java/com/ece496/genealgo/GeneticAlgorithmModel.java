@@ -1,14 +1,11 @@
-package GeneticAlgorithm;
+package com.ece496.genealgo;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Random;
 import java.util.logging.*;
 
-import GeneticAlgorithm.object.*;
-import GeneticAlgorithm.handler.*;
+import com.ece496.genealgo.object.*;
+import com.ece496.genealgo.handler.*;
 
 public class GeneticAlgorithmModel{
     private static final Logger logger = Logger.getGlobal();

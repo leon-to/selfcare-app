@@ -1,14 +1,11 @@
-package GeneticAlgorithm;
+package com.ece496.genealgo;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.logging.*;
 
-import GeneticAlgorithm.*;
-import GeneticAlgorithm.handler.EventHandler;
-import GeneticAlgorithm.handler.FitnessHandler;
-import GeneticAlgorithm.handler.PopulationHandler;
-import GeneticAlgorithm.handler.TimeslotHandler;
+import com.ece496.genealgo.handler.*;
+import com.ece496.genealgo.object.*;
 
 public class Main{
     public static void main(String[] args) throws Exception {

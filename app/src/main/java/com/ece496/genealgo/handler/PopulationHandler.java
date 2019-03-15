@@ -1,9 +1,9 @@
-package GeneticAlgorithm.handler;
+package com.ece496.genealgo.handler;
 
 import java.util.Random;
 import java.util.Vector;
 
-import GeneticAlgorithm.object.Individual;
+import com.ece496.genealgo.object.Individual;
 
 public class PopulationHandler{
     private static final Random rand = new Random();

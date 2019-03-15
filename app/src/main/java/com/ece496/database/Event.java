@@ -1,10 +1,12 @@
-package GeneticAlgorithm.object;
+package com.ece496.database;
+
+import com.orm.SugarRecord;
 
 import java.time.LocalDateTime;
 
-public class Event{
-    public String name;
-    public LocalDateTime deadline;
+public class Event  extends SugarRecord<Event>  {
+    String name;
+    LocalDateTime deadline;
 
     
     public Event(String name, LocalDateTime deadline){
@@ -16,6 +18,13 @@ public class Event{
     }
     public Event(){
         this("no name", LocalDateTime.now().plusDays(7));
+    }
+
+    public String get_name(){
+        return get_name();
+    }
+    public  LocalDateTime get_deadline(){
+        return deadline;
     }
 
     @Override

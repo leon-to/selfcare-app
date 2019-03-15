@@ -1,9 +1,10 @@
-package GeneticAlgorithm.handler;
+package com.ece496.genealgo.handler;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import GeneticAlgorithm.object.*;
+import com.ece496.genealgo.object.*;
+import com.ece496.database.Event;
 
 public class FitnessHandler {
     EventHandler h_event;
@@ -30,14 +31,15 @@ public class FitnessHandler {
             Event event = h_event.events.get(idx_event);
             Timeslot timeslot = h_timeslot.timeslots.get(idx_timeslot);
 
-            Duration t_total = Duration.between(now, event.deadline);
-            Duration t_left = Duration.between(timeslot.datetime, event.deadline);
+            Duration t_total = Duration.between(now, event.get_deadline());
+            Duration t_left = Duration.between(timeslot.datetime, event.get_deadline());
             
             total_score += t_left.toHours() / (float)t_total.toHours();
+            System.out.println("left: " + t_left.toHours() + " total: " + t_total.toHours());
         }
 
         final_score = total_score / individual.chrom.length;
-        // System.out.println("total: " + total_score + " final: " + final_score);
+        System.out.println("total: " + total_score + " final: " + final_score);
         return final_score;
     }
     public double compute_relaxation_fitness(Individual individual){

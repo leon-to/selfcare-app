@@ -1,9 +1,9 @@
-package GeneticAlgorithm.handler;
+package com.ece496.genealgo.handler;
 
 import java.time.LocalDateTime;
 import java.util.Vector;
 
-import GeneticAlgorithm.object.Event;
+import com.ece496.database.Event;
 
 public class EventHandler{
     public Vector<Event> events;
