@@ -3,7 +3,6 @@ package com.ece496.selfcare;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
 
 
 import com.riontech.calendar.CustomCalendar;
@@ -21,45 +19,63 @@ import com.riontech.calendar.CustomCalendar;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private CustomCalendar customCalendar;
+    private CalendarFragment f_calendar;
+    private EventDialogFragment f_event;
+
+    private Toolbar toolbar;
+
+    private FloatingActionButton b_add_event;
+
+    private DrawerLayout l_drawer;
+
+    private NavigationView v_navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        // toolbar
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Snackbar.make(view, new DynamicScheduler(getContentResolver()).read_events(), Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                EventDialogFragment event_dialog = new EventDialogFragment();
-                event_dialog.show(getSupportFragmentManager(), "Event Dialog");
-            }
+        f_event = new EventDialogFragment();
+
+        // floating button: add event
+        b_add_event = findViewById(R.id.fab);
+        b_add_event.setOnClickListener(view -> {
+            f_event.show(getSupportFragmentManager(), "Event Dialog");
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // drawer
+        l_drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this,
+                l_drawer,
+                toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        );
+        l_drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        // navigation view
+        v_navigation = findViewById(R.id.nav_view);
+        v_navigation.setNavigationItemSelectedListener(this);
 
+        // calendar fragment
+        f_calendar = new CalendarFragment();
 
-
-
+        this.getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.flContent, f_calendar)
+            .commit();
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (l_drawer.isDrawerOpen(GravityCompat.START)) {
+            l_drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -87,34 +103,27 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment = null;
-        Class fragmentClass = null;
+        Fragment fragment=null;
 
         if (id == R.id.nav_calendar) {
             // Handle the camera action
-            fragmentClass = CalendarFragment.class;
+            fragment = f_calendar;
         } else if (id == R.id.nav_setting) {
-            fragmentClass = EventDialogFragment.class;
-        }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+            fragment = f_event;
         }
 
         // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        this.getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.flContent, fragment)
+            .commit();
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        l_drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }

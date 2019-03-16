@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -34,11 +34,38 @@
             android:layout_height="wrap_content"
             android:text="Deadline:" />
 
-        <DatePicker
-            android:id="@+id/dpDate"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <NumberPicker
+                android:id="@+id/np_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/common_10_dp"/>
+            <NumberPicker
+                android:id="@+id/np_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/common_10_dp"/>
+            <NumberPicker
+                android:id="@+id/np_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/common_10_dp"/>
+            <NumberPicker
+                android:id="@+id/np_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
+            android:layout_gravity="right"
+            android:text="Add" />
     </LinearLayout>
+
 </RelativeLayout>
