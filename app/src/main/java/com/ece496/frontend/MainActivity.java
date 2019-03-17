@@ -1,4 +1,4 @@
-package com.ece496.selfcare;
+package com.ece496.frontend;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.ece496.database.Event;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,6 +61,10 @@ public class MainActivity extends AppCompatActivity
         v_navigation = findViewById(R.id.nav_view);
         v_navigation.setNavigationItemSelectedListener(this);
 
+
+
+
+
         // calendar fragment
         f_calendar = new MonthViewFragment();
 
@@ -66,6 +72,7 @@ public class MainActivity extends AppCompatActivity
             .beginTransaction()
             .replace(R.id.flContent, f_calendar)
             .commit();
+
     }
 
     @Override

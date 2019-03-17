@@ -1,23 +1,17 @@
-package com.ece496.selfcare;
+package com.ece496.frontend;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
-import com.applandeo.materialcalendarview.EventDay;
+import com.ece496.database.Event;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.format.TextStyle;
-import java.util.Calendar;
-import java.util.Locale;
+import java.util.List;
 
 public class EventDialogFragment extends DialogFragment {
     private NumberPicker np_hour;
@@ -48,10 +42,18 @@ public class EventDialogFragment extends DialogFragment {
         np_hour.setValue(LocalDateTime.now().getHour());
 
 
+
+        // experiment: add event
+//        Event event = new Event("Testing");
+//        event.save();
+
+
+        List<Event> events = Event.listAll(Event.class);
+
         // set onClick for button "add event"
         b_add_event = view.findViewById(R.id.b_add_event);
         b_add_event.setOnClickListener(v ->
-                System.out.println(np_hour.getValue())
+                System.out.println(events)
         );
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ece496.selfcare">
+    package="com.ece496.frontend">
 
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
@@ -13,10 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.orm.SugarApp"
-        tools:replace="android:icon">
+
+        android:name="com.orm.SugarApp">
+
+
+        <meta-data android:name="DATABASE" android:value="event.db" />
+        <meta-data android:name="VERSION" android:value="2" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.ece496.database" />
+
         <activity
-            android:name=".MainActivity"
+            android:name="com.ece496.frontend.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,10 +33,6 @@
             </intent-filter>
         </activity>
 
-        <meta-data android:name="DATABASE" android:value="event.db" />
-        <meta-data android:name="VERSION" android:value="1" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.ece496.database" />
     </application>
 
 </manifest>

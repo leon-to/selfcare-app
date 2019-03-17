@@ -1,4 +1,4 @@
-package com.ece496.selfcare;
+package com.ece496.frontend;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

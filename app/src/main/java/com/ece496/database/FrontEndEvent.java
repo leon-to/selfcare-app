@@ -1,6 +1,7 @@
-package com.ece496.selfcare;
+package com.ece496.database;
 
-public class event {
+
+public class FrontEndEvent{
 
     private String event_title;
     private String event_description;
@@ -41,8 +42,8 @@ public class event {
     private int freq_end_hour;
     private int freq_end_minute;
 
-    event(String title, String description, String start_time, String end_time, int duration, String freq_start_time,
-          String freq_end_time, int freq, String due_date) {
+    FrontEndEvent(String title, String description, String start_time, String end_time, int duration, String freq_start_time,
+                  String freq_end_time, int freq, String due_date) {
 
         /*
          * NOTE: start_time, end_time, freq_start_time, and freq_end_time MUST be in the

@@ -1,4 +1,4 @@
-package com.ece496.selfcare;
+package com.ece496.frontend;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,14 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.applandeo.materialcalendarview.CalendarView;
-import com.applandeo.materialcalendarview.EventDay;
 import com.framgia.library.calendardayview.CalendarDayView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 
 public class MonthViewFragment extends Fragment {
