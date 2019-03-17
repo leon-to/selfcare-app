@@ -9,3 +9,9 @@
 /build
 /captures
 .externalNativeBuild
+app/.classpath
+app/.project
+app/.settings
+.idea
+.project
+.settings
